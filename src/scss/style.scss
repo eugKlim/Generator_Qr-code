@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './vars.scss';
+@import './fonts.scss';
+
+@layer components {
+  button {
+    transition: 0.3s linear;
+  }
+
+  .bgGradient {
+    background: rgb(13, 2, 170);
+    background: linear-gradient(
+      120deg,
+      rgba(13, 2, 170, 1) 39%,
+      rgba(98, 38, 187, 1) 53%
+    );
+  }
+
+  .bg {
+    &-options {
+      @apply bg-no-repeat bg-center bg-full;
+    }
+  }
+}
