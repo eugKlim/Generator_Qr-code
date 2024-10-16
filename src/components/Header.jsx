@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate, NavLink } from 'react-router-dom';
 
 const NavItem = styled.li`
-cursor: pointer;
-
+  cursor: pointer;
+  user-select: none;
   &::before {
     margin-left: auto;
     margin-bottom: 6px;
@@ -23,25 +24,40 @@ cursor: pointer;
     
     &:hover::after, &:hover::before {
       width: 100%;
-}
+  }
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full p-6 bg-sky-700 bg-opacity-95 flex justify-between items-center flex-wrap">
-      <h1 className="text-2xl font-KaushanScripts uppercase italic text-shadow-custom">
+      <h1
+        className="text-2xl font-KaushanScripts uppercase italic text-shadow-custom cursor-pointer"
+        onClick={() => navigate('/home')}
+        title="Go to Home"
+      >
         <span className="text-rose-600 font-bold">Qr</span>Generator
       </h1>
 
       <nav>
         <ul className="flex items-center space-x-6 uppercase tracking-widest">
-          <NavItem>На главную</NavItem>
+          {/*  */}
+          <NavItem className="header-link">
+            <NavLink to={'/home'} activeclassname="activeNav">
+              На главную
+            </NavLink>
+          </NavItem>
+
           <span className="h-full text-gray-400 text-lg bold">|</span>
-          <NavItem className="relative pr-5">
-            Сохраненные Qr
-            <span className="bg-orange-600 py-1 px-2 rounded-full -mt-10 inline-block absolute bottom-4 -right-2 ">
-              0
-            </span>
+
+          <NavItem className="header-link relative pr-5">
+            <NavLink to={'/allSaveQr'} activeclassname="activeNav">
+              Сохраненные Qr
+              <span className="bg-orange-600 py-1 px-2 rounded-full -mt-10 inline-block absolute bottom-4 -right-2 ">
+                0
+              </span>
+            </NavLink>
           </NavItem>
         </ul>
       </nav>

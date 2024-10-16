@@ -8,6 +8,12 @@
   button {
     transition: 0.3s linear;
   }
+  .header-link .active {
+    color: rgb(230, 80, 26);
+    & span {
+      color: #fff;
+    }
+  }
 
   .bgGradient {
     background: rgb(13, 2, 170);
@@ -16,6 +22,17 @@
       rgba(13, 2, 170, 1) 39%,
       rgba(98, 38, 187, 1) 53%
     );
+  }
+
+  .bg-dark {
+    background-color: rgb(0, 0, 0, 0.95);
+  }
+
+  .centerBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 
   .bg {

@@ -1,10 +1,10 @@
 import { QRCodeSVG } from 'qrcode.react';
 
-const GenerateQr = () => {
+const GenerateQr = ({ value }) => {
   return (
-    <div className="ml-10">
-      <div className="bg-teal-300 p-6 inline-block">
-        <QRCodeSVG value={value} />
+    <div>
+      <div className="bg-teal-300 p-6 inline-block rounded-2xl">
+        <QRCodeSVG value={value} size={200} />
       </div>
     </div>
   );
