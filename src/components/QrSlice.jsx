@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const QrSlice = createSlice({
   name: 'qrSlice',
@@ -9,10 +8,9 @@ const QrSlice = createSlice({
   reducers: {
     setInputValue: (state, action) => {
       state.inputValue = action.payload;
-    }
-  }
-})
+    },
+  },
+});
 
-
-export const {setInputValue} = QrSlice.actions;
+export const { setInputValue } = QrSlice.actions;
 export default QrSlice.reducer;

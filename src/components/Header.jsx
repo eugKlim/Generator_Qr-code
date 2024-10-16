@@ -35,17 +35,15 @@ const Header = () => {
       <h1
         className="text-2xl font-KaushanScripts uppercase italic text-shadow-custom cursor-pointer"
         onClick={() => navigate('/home')}
-        title="Go to Home"
       >
         <span className="text-rose-600 font-bold">Qr</span>Generator
       </h1>
 
       <nav>
         <ul className="flex items-center space-x-6 uppercase tracking-widest">
-          {/*  */}
           <NavItem className="header-link">
             <NavLink to={'/home'} activeclassname="activeNav">
-              На главную
+              Главная
             </NavLink>
           </NavItem>
 
