@@ -8,12 +8,6 @@
   button {
     transition: 0.3s linear;
   }
-  .header-link .active {
-    color: rgb(230, 80, 26);
-    & span {
-      color: #fff;
-    }
-  }
 
   .bgGradient {
     background: rgb(13, 2, 170);
@@ -33,11 +27,5 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  }
-
-  .bg {
-    &-options {
-      @apply bg-no-repeat bg-center bg-full;
-    }
   }
 }
