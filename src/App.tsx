@@ -1,5 +1,5 @@
 import './scss/style.scss';
-import React, { Suspense, lazy, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,14 +9,14 @@ import {
 import { useDispatch } from 'react-redux';
 import { getQrHistoryStorage } from './components/QrSlice';
 
-import Footer from './components/Footer';
-import Header from './components/Header';
-import ScrollToTop from './Utils/ScrollToTop';
+import Footer from './components/Footer.tsx';
+import Header from './components/Header.tsx';
+import ScrollToTop from './Utils/ScrollToTop.tsx';
 
-import HomePage from './pages/HomePage';
-import AllQrPage from './pages/AllQrPage';
-import GetQrPage from './pages/GetQrPage';
-import ErrorPage from './pages/ErrorPage';
+import HomePage from './pages/HomePage.tsx';
+import AllQrPage from './pages/AllQrPage.tsx';
+import GetQrPage from './pages/GetQrPage.tsx';
+import ErrorPage from './pages/ErrorPage.tsx';
 
 function App() {
   const dispatch = useDispatch();

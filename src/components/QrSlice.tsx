@@ -1,4 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface IQrSlice {
+  inputValue: string;
+  qrHistoryStorage: string[];
+  qrHistoryCounter: number;
+}
 
 const QrSlice = createSlice({
   name: 'qrSlice',
@@ -6,9 +12,9 @@ const QrSlice = createSlice({
     inputValue: '',
     qrHistoryStorage: [],
     qrHistoryCounter: 0,
-  },
+  } as IQrSlice,
   reducers: {
-    setInputValue: (state, action) => {
+    setInputValue: (state, action: PayloadAction<string>) => {
       state.inputValue = action.payload;
     },
 
@@ -20,7 +26,7 @@ const QrSlice = createSlice({
       state.qrHistoryCounter = haveQrStorage.length;
     },
 
-    setNewQrInStorage: (state, action) => {
+    setNewQrInStorage: (state, action: PayloadAction<string>) => {
       const getQrStorage = localStorage.getItem('qrStorage');
       const haveQrStorage = getQrStorage ? JSON.parse(getQrStorage) : [];
 
@@ -30,10 +36,11 @@ const QrSlice = createSlice({
       state.qrHistoryCounter = haveQrStorage.length + 1;
     },
 
-    deleteQrFromStorage: (state, action) => {
-      const getQrStorage = JSON.parse(localStorage.getItem('qrStorage'));
-      const updateQrStorage = getQrStorage.filter(
-        (item) => item !== action.payload
+    deleteQrFromStorage: (state, action: PayloadAction<string>) => {
+      const getQrStorage = localStorage.getItem('qrStorage');
+      const haveQrStorage = getQrStorage ? JSON.parse(getQrStorage) : [];
+      const updateQrStorage = haveQrStorage.filter(
+        (item: string) => item !== action.payload
       );
       localStorage.setItem('qrStorage', JSON.stringify(updateQrStorage));
 

@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonComponents = styled.button`
+const ButtonComponents = styled.button<{
+  $startColor: string;
+  $endColor: string;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -56,7 +59,19 @@ width: 40px;
 }
 `;
 
-const ButtonComponent1 = ({ event, children, startColor, endColor }) => {
+interface IButtonComponent {
+  event: React.MouseEventHandler<HTMLButtonElement>;
+  startColor: string;
+  endColor: string;
+  children: React.ReactNode;
+}
+
+const ButtonComponent1: React.FC<IButtonComponent> = ({
+  event,
+  children,
+  startColor,
+  endColor,
+}) => {
   return (
     <ButtonComponents
       onClick={event}

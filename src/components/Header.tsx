@@ -1,8 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setInputValue } from './QrSlice';
+import { setInputValue } from './QrSlice.tsx';
+import { AppDispatch, RootState } from './Store.tsx';
 
 const NavItem = styled.li`
   cursor: pointer;
@@ -40,8 +40,8 @@ const HeaderStyle = styled.header`
 
 const Header = () => {
   const navigate = useNavigate();
-  const { qrHistoryCounter } = useSelector((state) => state.qrSlice);
-  const dispatch = useDispatch();
+  const { qrHistoryCounter } = useSelector((state: RootState) => state.qrSlice);
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <HeaderStyle className="w-full px-6 py-2 bg-sky-700 bg-opacity-95 flex justify-between items-center flex-wrap">
@@ -58,7 +58,7 @@ const Header = () => {
             className="header-link"
             onClick={() => dispatch(setInputValue(''))}
           >
-            <NavLink to={'/home'} activeclassname="activeNav">
+            <NavLink to={'/home'} className="activeNav">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -81,7 +81,7 @@ const Header = () => {
           <span className="h-full text-gray-400 text-2xl bold">|</span>
 
           <NavItem className="header-link relative pr-5">
-            <NavLink to={'/allSaveQr'} activeclassname="activeNav">
+            <NavLink to={'/allSaveQr'} className="activeNav">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

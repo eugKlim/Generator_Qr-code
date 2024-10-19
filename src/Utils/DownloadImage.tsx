@@ -1,4 +1,4 @@
-export const DownloadImage = (svgElement, format) => {
+export const DownloadImage = (svgElement: SVGElement | null, format: 'svg' | 'png') => {
   if (!svgElement) return;
 
   const svgData = new XMLSerializer().serializeToString(svgElement);
@@ -21,7 +21,7 @@ export const DownloadImage = (svgElement, format) => {
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
+      if(ctx != null) ctx.drawImage(img, 0, 0);
 
       const pngData = canvas.toDataURL('image/png');
       const link = document.createElement('a');

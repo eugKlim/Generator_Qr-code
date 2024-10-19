@@ -1,6 +1,10 @@
 import { QRCodeSVG } from 'qrcode.react';
 
-const GenerateQr = ({ value}) => {
+interface IGenerateQr {
+  value: string;
+}
+
+const GenerateQr: React.FC<IGenerateQr> = ({ value }) => {
   return (
     <div>
       <div className="bg-teal-300 p-6 inline-block rounded-2xl cursor-none">

@@ -36,11 +36,23 @@ const ButtonComponents = styled.button`
 & span:not(hover) {
   transition: all .2s;
 }
-
 `;
 
-const HoverClickButton2 = ({event, children}) => {
-  return <ButtonComponents onClick={event}> <span>{children}</span></ButtonComponents>;
+interface IButtonComponent2 {
+  event: React.MouseEventHandler<HTMLButtonElement>;
+  children: React.ReactNode;
+}
+
+const HoverClickButton2: React.FC<IButtonComponent2> = ({
+  event,
+  children,
+}) => {
+  return (
+    <ButtonComponents onClick={event}>
+      {' '}
+      <span>{children}</span>
+    </ButtonComponents>
+  );
 };
 
 export default HoverClickButton2;

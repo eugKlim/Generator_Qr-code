@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setInputValue } from './QrSlice';
+import { setInputValue } from './QrSlice.tsx';
+import { AppDispatch, RootState } from './Store';
 
 const GetQrUrl = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { inputValue } = useSelector((state) => state.qrSlice);
+  const dispatch = useDispatch<AppDispatch>();
+  const { inputValue } = useSelector((state: RootState) => state.qrSlice);
 
   useEffect(() => {
     sessionStorage.setItem('textInput', inputValue);

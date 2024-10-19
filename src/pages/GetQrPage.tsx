@@ -1,15 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import GenerateQr from '../components/GenerateQr';
 import { useNavigate } from 'react-router-dom';
-import { DownloadImage } from '../Utils/DownloadImage';
-import ButtonComponent1 from '../components/button-components/ButtonComponent1';
+import { DownloadImage } from '../Utils/DownloadImage.tsx';
+import ButtonComponent1 from '../components/button-components/ButtonComponent1.tsx';
 import { useDispatch } from 'react-redux';
 import { setNewQrInStorage, setInputValue } from '../components/QrSlice';
+import { AppDispatch } from '../components/Store';
 
 const GetQrPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const getUserText = sessionStorage.getItem('textInput');
+  const dispatch = useDispatch<AppDispatch>();
+  const getUserText: string = sessionStorage.getItem('textInput') ?? '';
 
   useEffect(() => {
     dispatch(setInputValue(getUserText));
@@ -17,10 +18,15 @@ const GetQrPage = () => {
   });
 
   // for download qr
-  const qrRef = useRef();
-  const handleDownloadImage = (format) => {
-    const svgElement = qrRef.current.querySelector('svg');
-    DownloadImage(svgElement, format);
+  const qrRef = useRef<HTMLDivElement | null>(null);
+
+  const handleDownloadImage = (format: 'svg' | 'png') => {
+    if (qrRef.current) {
+      const svgElement = qrRef.current.querySelector('svg');
+      if (svgElement) {
+        DownloadImage(svgElement, format);
+      }
+    }
   };
   // /
 
@@ -54,7 +60,8 @@ const GetQrPage = () => {
               navigate('/home');
               dispatch(setInputValue(''));
             }}
-            className="uppercase px-20 py-10"
+            startColor=''
+            endColor=''
           >
             Сгенерировать еще
             <svg

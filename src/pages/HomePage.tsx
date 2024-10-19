@@ -1,5 +1,4 @@
-import React from 'react';
-import GetQrUrl from '../components/GetUrl';
+import GetQrUrl from '../components/GetUrl.tsx';
 
 const Home = () => {
   return (

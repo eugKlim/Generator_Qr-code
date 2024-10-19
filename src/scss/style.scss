@@ -1,8 +1,8 @@
+@use './vars' as *;
+@use './fonts' as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import './vars.scss';
-@import './fonts.scss';
 
 @layer components {
   button {

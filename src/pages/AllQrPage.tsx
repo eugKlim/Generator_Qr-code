@@ -1,14 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react';
-import GenerateQr from '../components/GenerateQr';
-import { DownloadImage } from '../Utils/DownloadImage';
+import { useRef, useEffect, useState } from 'react';
+import GenerateQr from '../components/GenerateQr.tsx';
+import { DownloadImage } from '../Utils/DownloadImage.js';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getQrHistoryStorage,
   deleteQrFromStorage,
-} from '../components/QrSlice';
+} from '../components/QrSlice.tsx';
+import { AppDispatch, RootState } from '../components/Store.tsx';
 
-import ButtonComponent1 from '../components/button-components/ButtonComponent1';
-import ButtonComponent2 from '../components/button-components/ButtonComponent2';
+import ButtonComponent1 from '../components/button-components/ButtonComponent1.js';
+import ButtonComponent2 from '../components/button-components/ButtonComponent2.js';
 
 const AllQrPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,23 +19,27 @@ const AllQrPage = () => {
   }, []);
 
   // for download qr
-  const qrRef = useRef();
-  const handleDownloadImage = (format) => {
-    const svgElement = qrRef.current.querySelector('svg');
-    DownloadImage(svgElement, format);
+  const qrRef = useRef<HTMLDivElement | null>(null);
+  const handleDownloadImage = (format: 'svg' | 'png') => {
+    if (qrRef.current) {
+      const svgElement = qrRef.current.querySelector('svg');
+      if (svgElement) {
+        DownloadImage(svgElement, format);
+      }
+    }
   };
   // /
 
   // getQr from localStorage
-  const dispatch = useDispatch();
-  const { qrHistoryStorage } = useSelector((state) => state.qrSlice);
+  const dispatch = useDispatch<AppDispatch>();
+  const { qrHistoryStorage } = useSelector((state: RootState) => state.qrSlice);
 
   useEffect(() => {
     dispatch(getQrHistoryStorage());
   }, [dispatch]);
   // /
 
-  function deleteQr(item) {
+  function deleteQr(item: string) {
     dispatch(deleteQrFromStorage(item));
     dispatch(getQrHistoryStorage());
   }
@@ -46,7 +51,7 @@ const AllQrPage = () => {
       ) : (
         <div className="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-20 justify-items-center">
           {qrHistoryStorage.length !== 0 ? (
-            qrHistoryStorage.map((item, index) => (
+            [...qrHistoryStorage].reverse().map((item, index) => (
               <div
                 className="inline-block p-4 rounded-2xl w-96 bgGradient"
                 key={index}
