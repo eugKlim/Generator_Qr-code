@@ -23,18 +23,12 @@ const GetQrUrl = () => {
           placeholder="URL"
         />
 
-        <button
-          className={`${
-            inputValue.length === 0
-              ? 'bg-rose-600 opacity-45  cursor-not-allowed'
-              : 'bg-green-700'
-          } uppercase flex items-center py-5 px-14 font-bold rounded-xl m-auto shadow-custom`}
-          disabled={inputValue.length === 0}
-          onClick={() => navigate('/getQr')}
-        >
-          <span className="mr-3">Сгенерировать QR</span>
-
-          {inputValue.length != 0 ? (
+        {inputValue.length !== 0 ? (
+          <button
+            className="bg-green-700 uppercase flex items-center py-5 px-14 font-bold rounded-xl m-auto shadow-custom hover:bg-green-900 group"
+            onClick={() => navigate('/getQr')}
+          >
+            Сгенерировать QR
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -45,10 +39,17 @@ const GetQrUrl = () => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className="ml-4 group-hover:text-emerald-400 group-hover:translate-x-4 transition-all"
             >
               <path d="m9 18 6-6-6-6" />
             </svg>
-          ) : (
+          </button>
+        ) : (
+          <button
+            className="bg-rose-600 opacity-45  cursor-not-allowed uppercase flex items-center py-5 px-14 font-bold rounded-xl m-auto shadow-custom"
+            disabled
+          >
+            Введите url{' '}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -59,13 +60,14 @@ const GetQrUrl = () => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className="ml-4"
             >
               <circle cx="12" cy="12" r="10" />
               <path d="m15 9-6 6" />
               <path d="m9 9 6 6" />
             </svg>
-          )}
-        </button>
+          </button>
+        )}
       </div>
     </div>
   );

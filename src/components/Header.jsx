@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setInputValue } from './QrSlice';
 
 const NavItem = styled.li`
   cursor: pointer;
@@ -40,6 +41,7 @@ const HeaderStyle = styled.header`
 const Header = () => {
   const navigate = useNavigate();
   const { qrHistoryCounter } = useSelector((state) => state.qrSlice);
+  const dispatch = useDispatch();
 
   return (
     <HeaderStyle className="w-full px-6 py-2 bg-sky-700 bg-opacity-95 flex justify-between items-center flex-wrap">
@@ -52,7 +54,10 @@ const Header = () => {
 
       <nav>
         <ul className="flex items-center space-x-6 uppercase tracking-widest">
-          <NavItem className="header-link">
+          <NavItem
+            className="header-link"
+            onClick={() => dispatch(setInputValue(''))}
+          >
             <NavLink to={'/home'} activeclassname="activeNav">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

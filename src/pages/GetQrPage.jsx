@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import GenerateQr from '../components/GenerateQr';
 import { useNavigate } from 'react-router-dom';
-import { DownloadImage } from '../components/DownloadImage';
-import ButtonComponent from '../components/ButtonComponent';
+import { DownloadImage } from '../Utils/DownloadImage';
+import ButtonComponent1 from '../components/button-components/ButtonComponent1';
 import { useDispatch } from 'react-redux';
 import { setNewQrInStorage, setInputValue } from '../components/QrSlice';
 
@@ -25,8 +25,8 @@ const GetQrPage = () => {
   // /
 
   return (
-    <div className="bg-dark centerBlock">
-      <div className="bg-purple-900 p-9 rounded-2xl w-96">
+    <div className="bg-dark centerBlock py-20">
+      <div className="bg-purple-900 sm:p-3 md:p-9 rounded-2xl sm:w-full md:w-[400px]">
         {getUserText != null ? (
           <div ref={qrRef}>
             <GenerateQr value={getUserText} />
@@ -49,21 +49,52 @@ const GetQrPage = () => {
         </div>
 
         <div className="flex flex-col space-y-5">
-          <ButtonComponent
-            event={() => navigate('/home')}
+          <ButtonComponent1
+            event={() => {
+              navigate('/home');
+              dispatch(setInputValue(''));
+            }}
             className="uppercase px-20 py-10"
           >
             Сгенерировать еще
-          </ButtonComponent>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m6 17 5-5-5-5" />
+              <path d="m13 17 5-5-5-5" />
+            </svg>
+          </ButtonComponent1>
 
           {getUserText != null && getUserText.length != 0 ? (
             <>
-              <ButtonComponent event={() => handleDownloadImage('png')}>
-                Download PNG <img src="image/png-icon.svg" alt="png ico" />
-              </ButtonComponent>
-              <ButtonComponent event={() => handleDownloadImage('svg')}>
-                Download SVG <img src="image/svg-icon.svg" alt="svg ico" />
-              </ButtonComponent>
+              <ButtonComponent1
+                event={() => handleDownloadImage('png')}
+                startColor={'rgba(0, 206, 209, 0.7)'}
+                endColor={'rgba(255, 165, 0, 0.3)'}
+              >
+                Download PNG
+                <span className="p-3 rounded-full bg-rose-900 shadow-custom2">
+                  <img src="image/png-icon.svg" alt="png ico" />
+                </span>
+              </ButtonComponent1>
+              <ButtonComponent1
+                event={() => handleDownloadImage('svg')}
+                startColor={'rgba(255, 0, 255, 0.7)'}
+                endColor={'rgba(255, 165, 0, 0.3)'}
+              >
+                Download SVG
+                <span className="p-3 rounded-full bg-white shadow-custom2">
+                  <img src="image/svg-icon.svg" alt="svg ico" />
+                </span>
+              </ButtonComponent1>
             </>
           ) : (
             ''

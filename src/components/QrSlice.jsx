@@ -15,10 +15,8 @@ const QrSlice = createSlice({
     getQrHistoryStorage: (state) => {
       const getQrStorage = localStorage.getItem('qrStorage');
       const haveQrStorage = getQrStorage ? JSON.parse(getQrStorage) : [];
-      const filterStorage = haveQrStorage.filter(
-        (item) => !state.qrHistoryStorage.includes(item)
-      );
-      state.qrHistoryStorage.push(...filterStorage);
+
+      state.qrHistoryStorage = haveQrStorage;
       state.qrHistoryCounter = haveQrStorage.length;
     },
 
@@ -31,9 +29,24 @@ const QrSlice = createSlice({
       localStorage.setItem('qrStorage', JSON.stringify(updateHistoryStorage));
       state.qrHistoryCounter = haveQrStorage.length + 1;
     },
+
+    deleteQrFromStorage: (state, action) => {
+      const getQrStorage = JSON.parse(localStorage.getItem('qrStorage'));
+      const updateQrStorage = getQrStorage.filter(
+        (item) => item !== action.payload
+      );
+      localStorage.setItem('qrStorage', JSON.stringify(updateQrStorage));
+
+      state.qrHistoryStorage = updateQrStorage;
+      state.qrHistoryCounter = updateQrStorage.length;
+    },
   },
 });
 
-export const { setInputValue, getQrHistoryStorage, setNewQrInStorage } =
-  QrSlice.actions;
+export const {
+  setInputValue,
+  getQrHistoryStorage,
+  setNewQrInStorage,
+  deleteQrFromStorage,
+} = QrSlice.actions;
 export default QrSlice.reducer;

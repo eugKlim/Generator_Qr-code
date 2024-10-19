@@ -11,7 +11,7 @@ import { getQrHistoryStorage } from './components/QrSlice';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
-import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from './Utils/ScrollToTop';
 
 import HomePage from './pages/HomePage';
 import AllQrPage from './pages/AllQrPage';

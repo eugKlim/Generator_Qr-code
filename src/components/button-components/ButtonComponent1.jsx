@@ -12,7 +12,7 @@ const ButtonComponents = styled.button`
   text-transform: uppercase;
   font-weight: 600;
   border: none;
-  padding: 20px 30px;
+  padding: 10px 30px;
   cursor: pointer;
   perspective: 30rem;
   border-radius: 10px;
@@ -29,8 +29,8 @@ const ButtonComponents = styled.button`
   border-radius: 10px;
   background: linear-gradient(
     320deg,
-    rgba(0, 140, 255, 0.678),
-    rgba(0, 255, 0, 0.308)
+    ${({ $startColor }) => $startColor || 'rgba(0, 140, 255, 0.678)'},
+    ${({ $endColor }) => $endColor || 'rgba(0, 255, 0, 0.308)'}
   );
   z-index: 1;
   transition: background 3s;
@@ -43,7 +43,6 @@ const ButtonComponents = styled.button`
 
 & img {
 width: 40px;
-margin-left: 10px;
 }
 
 @keyframes rotate {
@@ -57,12 +56,16 @@ margin-left: 10px;
 }
 `;
 
-const ButtonComponent = ({event, children}) => {
+const ButtonComponent1 = ({ event, children, startColor, endColor }) => {
   return (
-    <ButtonComponents onClick={event}>
+    <ButtonComponents
+      onClick={event}
+      $startColor={startColor}
+      $endColor={endColor}
+    >
       {children}
     </ButtonComponents>
   );
 };
 
-export default ButtonComponent;
+export default ButtonComponent1;
