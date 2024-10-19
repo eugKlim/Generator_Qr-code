@@ -52,8 +52,8 @@ const Header = () => {
         <span className="text-rose-600 font-bold">Qr</span>Generator
       </h1>
 
-      <nav>
-        <ul className="flex items-center space-x-6 uppercase tracking-widest">
+      <nav className="sm:block sm:w-full sm:mt-4 md:w-auto md:mt-0">
+        <ul className="sm:inline-flex md:flex md:items-center space-x-6 uppercase tracking-widest">
           <NavItem
             className="header-link"
             onClick={() => dispatch(setInputValue(''))}
