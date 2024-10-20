@@ -33,12 +33,16 @@ const GetQrPage = () => {
   return (
     <div className="bg-dark centerBlock py-20">
       <div className="bg-purple-900 sm:p-3 md:p-9 rounded-2xl sm:w-full md:w-[400px]">
-        {getUserText != null ? (
+        {getUserText != null && getUserText.length != 0 ? (
           <div ref={qrRef}>
             <GenerateQr value={getUserText} />
           </div>
         ) : (
-          <img src="image/noQr.gif" alt="No qr code" className="mx-auto" />
+          <img
+            src="image/noQr.gif"
+            alt="No qr code"
+            className="mx-auto rounded-3xl"
+          />
         )}
 
         <div className="mt-6 mb-10">
@@ -55,33 +59,61 @@ const GetQrPage = () => {
         </div>
 
         <div className="flex flex-col space-y-5">
-          <ButtonComponent1
-            event={() => {
-              navigate('/home');
-              dispatch(setInputValue(''));
-            }}
-            startColor=''
-            endColor=''
-          >
-            Сгенерировать еще
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {getUserText.length === 0 || getUserText === null ? (
+            <ButtonComponent1
+              event={() => {
+                navigate('/home');
+                dispatch(setInputValue(''));
+              }}
+              startColor=""
+              endColor=""
             >
-              <path d="m6 17 5-5-5-5" />
-              <path d="m13 17 5-5-5-5" />
-            </svg>
-          </ButtonComponent1>
+              Сгенерировать qr code
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m6 17 5-5-5-5" />
+                <path d="m13 17 5-5-5-5" />
+              </svg>
+            </ButtonComponent1>
+          ) : (
+            ''
+          )}
 
           {getUserText != null && getUserText.length != 0 ? (
             <>
+              <ButtonComponent1
+                event={() => {
+                  navigate('/home');
+                  dispatch(setInputValue(''));
+                }}
+                startColor=""
+                endColor=""
+              >
+                Сгенерировать еще
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m6 17 5-5-5-5" />
+                  <path d="m13 17 5-5-5-5" />
+                </svg>
+              </ButtonComponent1>
               <ButtonComponent1
                 event={() => handleDownloadImage('png')}
                 startColor={'rgba(0, 206, 209, 0.7)'}
