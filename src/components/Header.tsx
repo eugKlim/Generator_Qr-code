@@ -47,7 +47,10 @@ const Header = () => {
     <HeaderStyle className="w-full px-6 py-2 bg-sky-700 bg-opacity-95 flex justify-between items-center flex-wrap">
       <h1
         className="text-2xl font-KaushanScripts uppercase italic text-shadow-custom cursor-pointer"
-        onClick={() => navigate('/home')}
+        onClick={() => {
+          navigate('/home');
+          dispatch(setInputValue(''));
+        }}
       >
         <span className="text-rose-600 font-bold">Qr</span>Generator
       </h1>
